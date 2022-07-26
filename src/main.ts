@@ -128,7 +128,7 @@ async function installDefaultConfigs(installPath: string) : Promise<void> {
 	const sourcePath = path.join(__dirname, "../config");
 	const configInstallPath = path.join(installPath, "phpstan");
 
-	info(`${ACTION_OUT_PREFIX} Installing default PHP-Stan configs to ${configInstallPath}`);
+	info(`${ACTION_OUT_PREFIX} Installing default PHPStan configs to ${configInstallPath}`);
 
 	await fse.mkdir(configInstallPath);
 	await fse.copy(sourcePath, configInstallPath);
@@ -137,14 +137,15 @@ async function installDefaultConfigs(installPath: string) : Promise<void> {
 	const body = await fetch(pmmpEnumRuleUrl)
 		.then((x) => x.arrayBuffer())
 		.catch((err) => {
-			setFailed(`Failed to download PMMP phpstan rule from ${pmmpEnumRuleUrl}`);
+			setFailed(`Failed to download PMMP PHPStan rule from ${pmmpEnumRuleUrl}`);
 			return undefined;
 		});
 
 	if (body === undefined) return;
 
 	const ruleFileName = path.join(configInstallPath, "rules", "DisallowEnumComparisonRule.php");
-	await fse.writeFile(ruleFileName, body);
+	await fse.outputFile(ruleFileName, body);
+	await fse.chmod(ruleFileName, 0o755)
 }
 
 ;(async () => {
