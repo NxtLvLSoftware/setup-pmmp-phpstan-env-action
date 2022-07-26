@@ -3,7 +3,7 @@ inputs:
     description: |
       The path to install sources and configs to.
     required: false
-    default: "pocketmine"
+    default: "./pocketmine"
   pmmp-version:
     description: |
       The target PMMP sources to install.
