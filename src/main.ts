@@ -8,7 +8,7 @@ import * as path from "path"
 import * as fse from "fs-extra"
 import fetch from "node-fetch"
 
-const ACTION_NAME = "Setup PHPStan";
+const ACTION_NAME = "Setup PMMP PHPStan Environment";
 const ACTION_VERSION = "1";
 const ACTION_OUT_PREFIX = `[${ACTION_NAME}]`;
 
@@ -106,7 +106,7 @@ export async function run(): Promise<void> {
 	const RestOctokit = Octokit.plugin(restEndpointMethods);
 	const gitHubApi = new RestOctokit();
 
-	const release = await findVersion(gitHubApi, getInput("version"));
+	const release = await findVersion(gitHubApi, getInput("pmmp-version"));
 	const asset = findAsset(release.assets, GITHUB_RELEASE_ASSET_NAME);
 	info(`${ACTION_OUT_PREFIX} Using target version ${release.tag_name} released @ ${release.published_at}`);
 
