@@ -132,20 +132,6 @@ async function installDefaultConfigs(installPath: string) : Promise<void> {
 
 	await fse.mkdir(configInstallPath);
 	await fse.copy(sourcePath, configInstallPath);
-
-	const pmmpEnumRuleUrl = "https://github.com/pmmp/PocketMine-MP/blob/5d9f78303726a6ba58cdda8231976f57a54a73c4/tests/phpstan/rules/DisallowEnumComparisonRule.php";
-	const body = await fetch(pmmpEnumRuleUrl)
-		.then((x) => x.arrayBuffer())
-		.catch((err) => {
-			setFailed(`Failed to download PMMP PHPStan rule from ${pmmpEnumRuleUrl}`);
-			return undefined;
-		});
-
-	if (body === undefined) return;
-
-	const ruleFileName = path.join(configInstallPath, "rules", "DisallowEnumComparisonRule.php");
-	await fse.outputFile(ruleFileName, body);
-	await fse.chmod(ruleFileName, 0o755)
 }
 
 ;(async () => {
