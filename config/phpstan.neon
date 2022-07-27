@@ -3,4 +3,4 @@ includes:
     - ./rules/pm4-enum.phpstan.neon
 parameters:
     scanDirectories:
-        - ./rules
+        - rules
