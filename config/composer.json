@@ -1,0 +1,15 @@
+{
+    "name": "nxtlvlsoftware/setup-pmmp-phpstan-env",
+    "description": "GitHub Actions environment setup for PocketMine-MP plugins and libraries.",
+    "require-dev": {
+        "phpstan/phpstan-strict-rules": "^1.2.0"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "pocketmine\\phpstan\\rules\\": "rules/"
+        }
+    },
+    "replace": {
+        "phpstan/phpstan": "*"
+    }
+}
