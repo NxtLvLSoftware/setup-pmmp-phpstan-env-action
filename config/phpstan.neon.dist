@@ -1,7 +1,7 @@
 includes:
     - ./pocketmine.phpstan.neon
-rules:
-    - pocketmine\phpstan\rules\DisallowEnumComparisonRule
 parameters:
     bootstrapFiles:
-        - autoload_rules.php
+        - vendor/autoload.php
+rules:
+    - pocketmine\phpstan\rules\DisallowEnumComparisonRule
