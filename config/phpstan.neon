@@ -2,5 +2,5 @@ includes:
     - ./pocketmine.phpstan.neon
     - ./rules/pm4-enum.phpstan.neon
 parameters:
-    paths:
+    scanDirectories:
         - ./rules
