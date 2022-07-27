@@ -1,5 +1,6 @@
 includes:
-	- ./pocketmine.phpstan.neon
-	- ./rules/pm4-enum.phpstan.neon
+    - ./pocketmine.phpstan.neon
+    - ./rules/pm4-enum.phpstan.neon
 parameters:
-    paths: ./rules
+    paths:
+        - ./rules
