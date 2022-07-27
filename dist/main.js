@@ -8,8 +8,7 @@ const fetch_github_release_1 = require("@terascope/fetch-github-release");
 const cache = require("@actions/cache");
 const path = require("path");
 const fse = require("fs-extra");
-const node_fetch_1 = require("node-fetch");
-const ACTION_NAME = "Setup PHPStan";
+const ACTION_NAME = "Setup PMMP PHPStan Environment";
 const ACTION_VERSION = "1";
 const ACTION_OUT_PREFIX = `[${ACTION_NAME}]`;
 const GITHUB_REPO_OWNER = "pmmp";
@@ -89,7 +88,7 @@ async function install(releaseId, asset, restorePath, cacheKey) {
 async function run() {
     const RestOctokit = action_1.Octokit.plugin(plugin_rest_endpoint_methods_1.restEndpointMethods);
     const gitHubApi = new RestOctokit();
-    const release = await findVersion(gitHubApi, core_1.getInput("version"));
+    const release = await findVersion(gitHubApi, core_1.getInput("pmmp-version"));
     const asset = findAsset(release.assets, GITHUB_RELEASE_ASSET_NAME);
     core_1.info(`${ACTION_OUT_PREFIX} Using target version ${release.tag_name} released @ ${release.published_at}`);
     const restorePath = path.resolve(core_1.getInput("install-path"));
@@ -106,20 +105,9 @@ exports.run = run;
 async function installDefaultConfigs(installPath) {
     const sourcePath = path.join(__dirname, "../config");
     const configInstallPath = path.join(installPath, "phpstan");
-    core_1.info(`${ACTION_OUT_PREFIX} Installing default PHP-Stan configs to ${configInstallPath}`);
+    core_1.info(`${ACTION_OUT_PREFIX} Installing default PHPStan configs to ${configInstallPath}`);
     await fse.mkdir(configInstallPath);
     await fse.copy(sourcePath, configInstallPath);
-    const pmmpEnumRuleUrl = "https://github.com/pmmp/PocketMine-MP/blob/5d9f78303726a6ba58cdda8231976f57a54a73c4/tests/phpstan/rules/DisallowEnumComparisonRule.php";
-    const body = await node_fetch_1.default(pmmpEnumRuleUrl)
-        .then((x) => x.arrayBuffer())
-        .catch((err) => {
-        core_1.setFailed(`Failed to download PMMP phpstan rule from ${pmmpEnumRuleUrl}`);
-        return undefined;
-    });
-    if (body === undefined)
-        return;
-    const ruleFileName = path.join(configInstallPath, "rules", "DisallowEnumComparisonRule.php");
-    await fse.writeFile(ruleFileName, body);
 }
 ;
 (async () => {
