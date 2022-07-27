@@ -3,5 +3,5 @@ includes:
 rules:
     - pocketmine\phpstan\rules\DisallowEnumComparisonRule
 parameters:
-    scanDirectories:
-        - rules
+    bootstrapFiles:
+        - autoload_rules.php
