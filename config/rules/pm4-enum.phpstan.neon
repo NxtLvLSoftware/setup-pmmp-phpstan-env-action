@@ -1,2 +1,2 @@
 rules:
-    - ./DisallowEnumComparisonRule.php
+    - pocketmine\phpstan\rules\DisallowEnumComparisonRule
