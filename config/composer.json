@@ -6,7 +6,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "pocketmine\\phpstan\\rules\\": "rules/"
+            "pocketmine\\phpstan\\rules\\": "rules"
         }
     },
     "replace": {
