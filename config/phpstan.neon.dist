@@ -2,6 +2,6 @@ includes:
     - ./pocketmine.phpstan.neon
 parameters:
     paths:
-        - rules
+        - ./rules
 rules:
     - pocketmine\phpstan\rules\DisallowEnumComparisonRule
