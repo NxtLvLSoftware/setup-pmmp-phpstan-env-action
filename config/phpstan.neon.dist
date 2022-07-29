@@ -1,5 +1,5 @@
 includes:
-    - pocketmine.phpstan.neon
+    - pocketmine.phpstan.neon.dist
 parameters:
     paths:
         - ../../src
