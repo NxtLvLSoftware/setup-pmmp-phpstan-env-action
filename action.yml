@@ -1,0 +1,25 @@
+inputs:
+  install-path:
+    description: |
+      The path to install sources and configs to.
+    required: false
+    default: "./pocketmine"
+  pmmp-version:
+    description: |
+      The target pocketmine version sources to install.
+    required: false
+    default: latest
+
+outputs:
+  pmmp-phar:
+    description: Path to installed PMMP phar.
+
+name: Setup PMMP PHPStan Environment Action
+description: GitHub action for downloading pocketmine sources and providing default configs for phpstan analysis.
+author: NxtLvLSoftware Solutions
+branding:
+  icon: settings
+  color: blue
+runs:
+  using: node12
+  main: dist/main.js

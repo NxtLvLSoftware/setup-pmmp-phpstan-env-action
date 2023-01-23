@@ -1,0 +1,3 @@
+includes:
+    - phpstan.neon.dist
+    - vendor/phpstan/phpstan-strict-rules/rules.neon

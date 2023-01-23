@@ -1,0 +1,3 @@
+parameters:
+    bootstrapFiles:
+        - phar:///%currentWorkingDirectory%/pocketmine/PocketMine-MP.phar/vendor/autoload.php
