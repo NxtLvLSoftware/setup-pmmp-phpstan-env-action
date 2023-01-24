@@ -49,3 +49,6 @@ jobs:
         with:
           pmmp-version: latest
 ```
+
+## License
+`nxtlvlsoftware/tar-ops-action` is open-sourced software licensed under the [MIT license](LICENSE).
