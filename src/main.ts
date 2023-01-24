@@ -38,13 +38,23 @@ async function findVersion(gitHubApi: Octokit, target: string): Promise<RestEndp
 	}
 
 	if(target.toLowerCase() === "latest") {
-		const response = await gitHubApi.rest.repos.getLatestRelease({
-			owner: GITHUB_REPO_OWNER,
-			repo: GITHUB_REPO
-		});
+		const tags = await gitHubApi.rest.repos.listTags({owner: GITHUB_REPO_OWNER, repo: GITHUB_REPO});
+
+		if(tags.status !== 200) {
+			throw new Error(`Could not find tags for ${GITHUB_REPO_OWNER}/${GITHUB_REPO}`);
+		}
+
+		let latestTag;
+		for (const tag of tags.data) {
+			if(!tag.name.toLowerCase().includes("alpha")) {
+				latestTag = tag;
+			}
+		}
+
+		const response = await gitHubApi.rest.repos.getReleaseByTag({owner: GITHUB_REPO_OWNER, repo: GITHUB_REPO, tag: latestTag.name});
 
 		if(response.status !== 200) {
-			throw new Error(`Could not find latest ${GITHUB_REPO_OWNER}/${GITHUB_REPO} release`);
+			throw new Error(`Could not find release '${latestTag}' for ${GITHUB_REPO_OWNER}/${GITHUB_REPO}`);
 		}
 
 		return response.data;
