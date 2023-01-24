@@ -45,7 +45,7 @@ async function findVersion(gitHubApi: Octokit, target: string): Promise<RestEndp
 		}
 
 		let latestRelease;
-		for (const release of releases.data) {
+		for (const release of releases.data.reverse()) {
 			if(!release.tag_name.toLowerCase().includes("alpha")) {
 				latestRelease = release;
 			}
