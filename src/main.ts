@@ -38,16 +38,20 @@ async function findVersion(gitHubApi: Octokit, target: string): Promise<RestEndp
 	}
 
 	if(target.toLowerCase() === "latest") {
-		const response = await gitHubApi.rest.repos.getLatestRelease({
-			owner: GITHUB_REPO_OWNER,
-			repo: GITHUB_REPO
-		});
+		const releases = await gitHubApi.rest.repos.listReleases({owner: GITHUB_REPO_OWNER, repo: GITHUB_REPO});
 
-		if(response.status !== 200) {
-			throw new Error(`Could not find latest ${GITHUB_REPO_OWNER}/${GITHUB_REPO} release`);
+		if(releases.status !== 200) {
+			throw new Error(`Could not find releases for ${GITHUB_REPO_OWNER}/${GITHUB_REPO}`);
 		}
 
-		return response.data;
+		let latestRelease;
+		for (const release of releases.data) {
+			if(!release.tag_name.toLowerCase().includes("alpha")) {
+				latestRelease = release;
+			}
+		}
+
+		return latestRelease.data;
 	}
 
 	throw new Error("Invalid version target " + target);
