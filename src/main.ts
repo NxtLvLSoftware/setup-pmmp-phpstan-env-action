@@ -51,7 +51,7 @@ async function findVersion(gitHubApi: Octokit, target: string): Promise<RestEndp
 			}
 		}
 
-		return latestRelease.data;
+		return latestRelease;
 	}
 
 	throw new Error("Invalid version target " + target);
