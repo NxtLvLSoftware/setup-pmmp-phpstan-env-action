@@ -1,3 +1,6 @@
 includes:
     - phpstan.neon.dist
     - vendor/phpstan/phpstan-strict-rules/rules.neon
+parameters:
+    bootstrapFiles:
+        - %currentWorkingDirectory%/pocketmine/phpstan/vendor/autoload.php
