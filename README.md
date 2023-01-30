@@ -46,9 +46,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: nxtlvlsoftware/setup-pmmp-phpstan-env-action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           pmmp-version: latest
 ```
+
+Forwarding the `$GIHUB_TOKEN` environment variable is required to properly configure PocketMine sources as we
+interact with the GitHub API to fetch version information.
 
 ## License
 `nxtlvlsoftware/setup-pmmp-phpstan-env-action` is open-sourced software licensed under the [MIT license](LICENSE).
